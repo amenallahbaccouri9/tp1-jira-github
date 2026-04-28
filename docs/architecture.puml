@@ -1,0 +1,11 @@
+@startuml
+title Diagramme d'Architecture - Suivi Comptes Rendus
+
+rectangle "Navigateur Tuteur" as tuteur
+rectangle "Serveur GitHub Pages" as server
+rectangle "Dossier docs/" as docs
+
+tuteur -> server : Requête HTTP (comptes-rendus.html)
+server --> tuteur : Retourne la liste des comptes rendus
+server -> docs : Accède aux fichiers déposés
+@enduml
