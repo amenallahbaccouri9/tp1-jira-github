@@ -10,3 +10,4 @@ par les étudiants afin de suivre l'évolution du projet.
 
 ## Diagramme d'architecture
 ![Diagramme](docs/architecture.puml)
+- Test liaison Jira
