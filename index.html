@@ -2,10 +2,119 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Projet Fédéré</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portail Tuteur - Comptes Rendus</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Bienvenue sur le portail du Projet Fédéré</h1>
-  <a href="comptes-rendus.html">Consulter les comptes rendus</a>
+
+  <!-- LOGIN PAGE -->
+  <div id="login-page" class="page active">
+    <div class="login-container">
+      <div class="login-box">
+        <div class="logo">
+          <span class="logo-icon">📋</span>
+          <h1>Portail Tuteur</h1>
+          <p>Suivi des comptes rendus étudiants</p>
+        </div>
+        <div id="login-error" class="error-msg hidden">Email ou mot de passe incorrect.</div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="login-email" placeholder="tuteur@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Mot de passe</label>
+          <input type="password" id="login-password" placeholder="••••••••" />
+        </div>
+        <button class="btn-primary" onclick="login()">Se connecter</button>
+        <p class="hint">Compte démo: <b>tuteur@test.com</b> / <b>1234</b></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD PAGE -->
+  <div id="dashboard-page" class="page">
+    <nav class="navbar">
+      <div class="nav-left">
+        <span class="logo-icon">📋</span>
+        <span class="nav-title">Portail Tuteur</span>
+      </div>
+      <div class="nav-right">
+        <span id="nav-user">👤 Tuteur</span>
+        <button class="btn-logout" onclick="logout()">Déconnexion</button>
+      </div>
+    </nav>
+
+    <div class="dashboard">
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-number" id="stat-total">0</div>
+          <div class="stat-label">Total Étudiants</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-number" id="stat-depose">0</div>
+          <div class="stat-label">Déposés</div>
+        </div>
+        <div class="stat-card orange">
+          <div class="stat-number" id="stat-attente">0</div>
+          <div class="stat-label">En Attente</div>
+        </div>
+        <div class="stat-card red">
+          <div class="stat-number" id="stat-retard">0</div>
+          <div class="stat-label">En Retard</div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters">
+        <input type="text" id="search-input" placeholder="🔍 Rechercher un étudiant..." oninput="filterTable()" />
+        <select id="filter-statut" onchange="filterTable()">
+          <option value="">Tous les statuts</option>
+          <option value="Déposé">Déposé</option>
+          <option value="En attente">En attente</option>
+          <option value="En retard">En retard</option>
+        </select>
+        <select id="filter-semaine" onchange="filterTable()">
+          <option value="">Toutes les semaines</option>
+          <option value="Semaine 1">Semaine 1</option>
+          <option value="Semaine 2">Semaine 2</option>
+          <option value="Semaine 3">Semaine 3</option>
+        </select>
+      </div>
+
+      <!-- Table -->
+      <div class="table-container">
+        <table id="reports-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Étudiant</th>
+              <th>Email</th>
+              <th>Semaine</th>
+              <th>Fichier</th>
+              <th>Date de dépôt</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <tr><td colspan="8" class="loading">Chargement...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-box">
+      <h2>Détails du compte rendu</h2>
+      <div id="modal-content"></div>
+      <button class="btn-primary" onclick="closeModal()">Fermer</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
